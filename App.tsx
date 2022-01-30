@@ -9,6 +9,8 @@ import { PersistGate } from "redux-persist/integration/react";
 
 // import root navigator
 import RootNavigator from "./src/navigation";
+// App Layouts
+import AppNavigation from "./src/navigation/AppNavigation";
 // importing screens
 import SplashScreenWeb from "./src/screens/SplashScreen.web";
 // importing services
@@ -104,8 +106,9 @@ const MainApp = () => {
 
   return (
     <View onLayout={onLayout} style={{ flex: 1 }}>
-      <StatusBar style="auto" hidden />
-      <RootNavigator />
+      {/* <StatusBar style="auto" /> */}
+      <AppNavigation />
+      {/* <RootNavigator /> */}
     </View>
   );
 };
