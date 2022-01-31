@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import * as React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 
 // import screens
 import HomeScreen from "../screens/HomeScreen";
@@ -24,7 +24,7 @@ function SettingsScreen() {
 
 function MyTabBar({ state, descriptors, navigation }) {
   return (
-    <View style={{ flexDirection: "row" }}>
+    <View style={styles.navbar}>
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
         const label =
@@ -65,7 +65,12 @@ function MyTabBar({ state, descriptors, navigation }) {
             onLongPress={onLongPress}
             style={{ flex: 1 }}
           >
-            <Text style={{ color: isFocused ? "#673ab7" : "#222" }}>
+            <Text
+              style={[
+                styles.navItem,
+                { color: isFocused ? "#673ab7" : "#222" },
+              ]}
+            >
               {label}
             </Text>
           </TouchableOpacity>
@@ -82,8 +87,30 @@ export default function AppNavigation() {
     <NavigationContainer>
       <Tab.Navigator tabBar={(props) => <MyTabBar {...props} />}>
         <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Settings" component={SettingsScreen} />
+        <Tab.Screen name="Tasks" component={SettingsScreen} />
+        <Tab.Screen name="Plan" component={SettingsScreen} />
+        <Tab.Screen name="Analitic" component={SettingsScreen} />
+        <Tab.Screen name="User" component={SettingsScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );
 }
+
+const styles = StyleSheet.create({
+  navbar: {
+    padding: 20,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#fff",
+  },
+  navItem: {
+    textAlign: "center",
+  },
+  navImg: {
+    marginVertical: -10,
+    paddingVertical: 0,
+    marginBottom: 0,
+  },
+});
