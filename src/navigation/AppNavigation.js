@@ -2,17 +2,10 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import * as React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import SvgAdd from "../components/Svgs/Add";
 
 // import screens
 import HomeScreen from "../screens/HomeScreen";
-
-// function HomeScreen() {
-//   return (
-//     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-//       <Text>Home!</Text>
-//     </View>
-//   );
-// }
 
 function SettingsScreen() {
   return (
@@ -23,6 +16,7 @@ function SettingsScreen() {
 }
 
 function MyTabBar({ state, descriptors, navigation }) {
+  console.log({ state, descriptors, navigation });
   return (
     <View style={styles.navbar}>
       {state.routes.map((route, index) => {
@@ -43,7 +37,7 @@ function MyTabBar({ state, descriptors, navigation }) {
           });
 
           if (!isFocused && !event.defaultPrevented) {
-            navigation.navigate(route.name);
+            navigation.navigate(route.name, { name: "Custom profile header" });
           }
         };
 
@@ -71,7 +65,7 @@ function MyTabBar({ state, descriptors, navigation }) {
                 { color: isFocused ? "#673ab7" : "#222" },
               ]}
             >
-              {label}
+              <SvgAdd />
             </Text>
           </TouchableOpacity>
         );
@@ -86,8 +80,29 @@ export default function AppNavigation() {
   return (
     <NavigationContainer>
       <Tab.Navigator tabBar={(props) => <MyTabBar {...props} />}>
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Tasks" component={SettingsScreen} />
+        <Tab.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{
+            title: "Welcome",
+            headerStyle: {
+              backgroundColor: "#00155F",
+            },
+            headerTintColor: "#ffffff",
+            headerLeft: () => "Left",
+            headerRight: () => "Right",
+          }}
+        />
+        <Tab.Screen
+          name="Tasks"
+          component={SettingsScreen}
+          options={{
+            title: "Welcome",
+            headerStyle: {
+              backgroundColor: "#00155F",
+            },
+          }}
+        />
         <Tab.Screen name="Plan" component={SettingsScreen} />
         <Tab.Screen name="Analitic" component={SettingsScreen} />
         <Tab.Screen name="User" component={SettingsScreen} />
@@ -97,13 +112,21 @@ export default function AppNavigation() {
 }
 
 const styles = StyleSheet.create({
+  header: {
+    padding: 20,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#00155F",
+  },
   navbar: {
     padding: 20,
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#fff",
+    backgroundColor: "#00155F",
   },
   navItem: {
     textAlign: "center",
