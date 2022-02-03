@@ -1,33 +1,16 @@
-import { NavigationContainer } from "@react-navigation/native";
-import {
-  createStackNavigator,
-  TransitionSpecs,
-  CardStyleInterpolators,
-} from "@react-navigation/stack";
 import * as React from "react";
 
-// import screens
-import HomeScreen from "../screens/HomeScreen";
-
-const Stack = createStackNavigator();
+import ThemeWrapper from "../components/ThemeWrapper";
+import ThemeProvider from "../contexts/ThemeProvider";
+import AppNavigation from "./AppNavigation";
 
 const RootNavigator = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-          headerShown: false,
-          gestureDirection: "horizontal",
-          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-          transitionSpec: {
-            open: TransitionSpecs.TransitionIOSSpec,
-            close: TransitionSpecs.TransitionIOSSpec,
-          },
-        }}
-      >
-        <Stack.Screen name="Home" component={HomeScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <ThemeProvider>
+      <ThemeWrapper>
+        <AppNavigation />
+      </ThemeWrapper>
+    </ThemeProvider>
   );
 };
 

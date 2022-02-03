@@ -2,11 +2,19 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import * as React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+
 import SvgAdd from "../components/Svgs/Add";
-
+import { useTheme } from "../contexts/ThemeProvider";
 // import screens
-import HomeScreen from "../screens/HomeScreen";
+// import HomeScreen from "../screens/HomeScreen";
 
+function HomeScreen() {
+  return (
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <Text>HomeScreen!</Text>
+    </View>
+  );
+}
 function SettingsScreen() {
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
@@ -77,6 +85,8 @@ function MyTabBar({ state, descriptors, navigation }) {
 const Tab = createBottomTabNavigator();
 
 export default function AppNavigation() {
+  const theme = useTheme();
+  console.log("theme", theme);
   return (
     <NavigationContainer>
       <Tab.Navigator tabBar={(props) => <MyTabBar {...props} />}>
@@ -86,11 +96,11 @@ export default function AppNavigation() {
           options={{
             title: "Welcome",
             headerStyle: {
-              backgroundColor: "#00155F",
+              backgroundColor: theme.backgroundColor,
             },
-            headerTintColor: "#ffffff",
-            headerLeft: () => "Left",
-            headerRight: () => "Right",
+            headerTintColor: theme.textColor,
+            headerLeft: () => <Text>Left</Text>,
+            headerRight: () => <Text>Right</Text>,
           }}
         />
         <Tab.Screen
@@ -99,7 +109,7 @@ export default function AppNavigation() {
           options={{
             title: "Welcome",
             headerStyle: {
-              backgroundColor: "#00155F",
+              backgroundColor: theme.backgroundColor,
             },
           }}
         />

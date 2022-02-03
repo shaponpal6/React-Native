@@ -107,8 +107,8 @@ const MainApp = () => {
   return (
     <View onLayout={onLayout} style={{ flex: 1 }}>
       {/* <StatusBar style="auto" /> */}
-      <AppNavigation />
-      {/* <RootNavigator /> */}
+      {/* <AppNavigation /> */}
+      <RootNavigator />
     </View>
   );
 };
